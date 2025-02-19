@@ -1,0 +1,47 @@
+@use "sass:math";
+
+body {
+    margin: 0;
+}
+ul[class] {
+    list-style: none;
+    margin-left: 0;
+}
+
+.grid-main {
+    overflow-x: hidden;
+}
+.flex {
+    display: flex;
+}
+
+.grid-container {
+    display: grid;
+    grid-auto-columns: 20%;
+    grid-template-columns: repeat(au1o-fill, 20%);
+    background: lightgreen;
+    gap: 5px; /* Adjust gap between grid items */
+}
+
+.grid-item {
+    grid-row: 1;
+    grid-auto-columns: 1fr;
+    border: 1px solid #ccc;
+    background: lightblue;
+    pointer-events: none;
+}
+
+.grid-item img {
+    width: min(100%, 250px);
+    object-fit: cover;
+}
+
+* {
+    padding: 0;
+}
+
+@for $i from 0 through 6 {
+    [data-index="#{$i}"] {
+        grid-column: (#{$i + 1});
+    }
+}
