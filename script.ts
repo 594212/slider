@@ -16,41 +16,20 @@ function getImgGridIndex(i: imgIndex): gridIndex {
     return Number(getImgNode(i).index!) as gridIndex
 }
 
-class GridScheme {
-    private gridScheme: imgIndex[];
-    tail: imgIndex;
-
-    constructor(size: number) {
-        this.gridScheme = new Array<imgIndex>(size);
-        for (let imgIndex = 0 as imgIndex; imgIndex < size; imgIndex++) {
-            this.set(getImgGridIndex(imgIndex), imgIndex);
-        }
-        this.tail = this.get(0 as gridIndex);
-    }
-
-    get(i: gridIndex): imgIndex {
-        return this.gridScheme[i];
-    }
-
-    public set(gridIndex: gridIndex, imgIndex: imgIndex) {
-        setImgGridIndex(gridIndex, imgIndex);
-        this.gridScheme[gridIndex] = imgIndex;
-    }
-}
-
 
 // [0, 1, 2, 3, 4, 5, 6]
 // [1, 2, 3, 4, 5, 6, 0]
 // [2, 3, 4, 5, 6, 0, 1]
 
+let imgIndexOffset = 0;
 function moveRight() {
-    let size = children.length;
-    let gridScheme: GridScheme = new GridScheme(size);
-
-    for (let i = 0 as gridIndex; i < size - 1; i++) {
-        gridScheme.set(i, gridScheme.get(i + 1 as gridIndex));
+    for (let i = 0; i < children.length; i++) {
+        let gridIndex = (i - 1) % (children.length - 1);
+        setImgGridIndex(gridIndex as gridIndex, imgIndexFromOffset(i as gridIndex));
     }
-    console.log(size - 1, gridScheme.tail);
-    gridScheme.set(size - 1 as gridIndex, gridScheme.tail);
+    imgIndexOffset++
+}
 
+function imgIndexFromOffset(gridIndex: gridIndex): imgIndex {
+    return (gridIndex + imgIndexOffset) % children.length as imgIndex;
 }
