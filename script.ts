@@ -9,7 +9,7 @@ function getImgNode(i: imgIndex): DOMStringMap {
 }
 
 function setImgGridIndex(gridIndex: gridIndex, imgIndex: imgIndex) {
-    getImgNode(imgIndex).index = gridIndex.toString();
+    children[imgIndex].dataset.index = gridIndex.toString();
 }
 
 function getImgGridIndex(i: imgIndex): gridIndex {
@@ -17,19 +17,12 @@ function getImgGridIndex(i: imgIndex): gridIndex {
 }
 
 
-// [0, 1, 2, 3, 4, 5, 6]
-// [1, 2, 3, 4, 5, 6, 0]
-// [2, 3, 4, 5, 6, 0, 1]
-
 let imgIndexOffset = 0;
 function moveRight() {
     for (let i = 0; i < children.length; i++) {
         let gridIndex = (i - 1) % (children.length - 1);
-        setImgGridIndex(gridIndex as gridIndex, imgIndexFromOffset(i as gridIndex));
+        let imgIndex = (i + imgIndexOffset) % children.length;
+        setImgGridIndex(gridIndex as gridIndex, imgIndex as imgIndex);
     }
     imgIndexOffset++
-}
-
-function imgIndexFromOffset(gridIndex: gridIndex): imgIndex {
-    return (gridIndex + imgIndexOffset) % children.length as imgIndex;
 }
