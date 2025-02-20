@@ -8,19 +8,18 @@ ul[class] {
     margin-left: 0;
 }
 
-.grid-main {
-    overflow-x: hidden;
+.grid-container {
 }
 .flex {
     display: flex;
 }
 
-.grid-container {
+.grid-slider {
     display: grid;
     grid-auto-columns: 20%;
     grid-template-columns: repeat(au1o-fill, 20%);
     background: lightgreen;
-    gap: 5px; /* Adjust gap between grid items */
+    gap: 0; /* Adjust gap between grid items */
 }
 
 .grid-item {

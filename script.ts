@@ -1,5 +1,6 @@
-const container = <HTMLElement>document.querySelector('.grid-container')!;
-const children = container.children as HTMLCollectionOf<HTMLElement>;
+const container = <HTMLElement>document.querySelector('.grid-container');
+const slider = <HTMLElement>document.querySelector('.grid-slider')!;
+const children = slider.children as HTMLCollectionOf<HTMLElement>;
 
 type gridIndex = number & { __brand: "grid" };
 type imgIndex = number & { __brand: "image" };
@@ -37,7 +38,7 @@ container.addEventListener("touchend", (event: TouchEvent) => {
     for (let i = 1; i <= index; i++) {
         moveRight();
         translateX += width;
-        container.style.transform = `translateX(${translateX}px)`;
+        slider.style.transform = `translateX(${translateX}px)`;
 
     }
 });
@@ -46,7 +47,7 @@ container.addEventListener("touchmove", (event: TouchEvent) => {
     const touch = event.touches[0];
     translateX += touch.clientX * 0.2 - offset;
     logEvent("Touch Move", event, `${translateX} ${event}, ${offset} `);
-    container.style.transform = `translateX(${translateX}px)`;
+    slider.style.transform = `translateX(${translateX}px)`;
 });
 
 

@@ -5,7 +5,7 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('load', () => {
-    container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2;
+    slider.scrollLeft = (slider.scrollWidth - slider.clientWidth) / 2;
 });
 
 let offset = 0;
@@ -28,7 +28,7 @@ container.addEventListener("mouseup", () => {
     for (let i = 1; i <= index; i++) {
         moveRight();
         translateX += width;
-        container.style.transform = `translateX(${translateX}px)`;
+        slider.style.transform = `translateX(${translateX}px)`;
 
     }
 });
@@ -36,7 +36,7 @@ container.addEventListener("mouseup", () => {
 container.addEventListener("mousemove", (event) => {
     if (!pressed) return;
     translateX += event.offsetX - offset;
-    container.style.transform = `translateX(${translateX}px)`;
+    slider.style.transform = `translateX(${translateX}px)`;
 
 
 });
