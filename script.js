@@ -32,6 +32,7 @@ container.addEventListener("mouseup", () => {
 
     }
 });
+
 container.addEventListener("mousemove", (event) => {
     if (!pressed) return;
     translateX += event.offsetX - offset;
@@ -44,4 +45,5 @@ let button = document.getElementById('right');
 
 button.onclick = () => {
     moveRight();
+    log()
 };
