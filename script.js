@@ -1,8 +1,3 @@
-let width = children[0].getBoundingClientRect().width;
-
-window.addEventListener('resize', () => {
-    width = children[0].getBoundingClientRect().width;
-});
 
 window.addEventListener('load', () => {
     slider.scrollLeft = (slider.scrollWidth - slider.clientWidth) / 2;
@@ -18,6 +13,7 @@ container.addEventListener("mousedown", (event) => {
 });
 
 container.addEventListener("mouseup", () => {
+    const width = children[0].getBoundingClientRect().width;
     console.log('mouseup');
     pressed = false;
 
@@ -36,6 +32,7 @@ container.addEventListener("mouseup", () => {
 container.addEventListener("mousemove", (event) => {
     if (!pressed) return;
     translateX += event.offsetX - offset;
+    innerSlider.style.left = `${x - startX}px`;
     slider.style.transform = `translateX(${translateX}px)`;
 
 

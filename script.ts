@@ -23,12 +23,13 @@ function moveRight() {
 
 container.addEventListener("touchstart", (event: TouchEvent) => {
     const touch = event.touches[0];
-    offset = touch.clientX * 0.2;
+    offset = touch.clientX * 0.3;
     pressed = true;
 });
 
 container.addEventListener("touchend", (event: TouchEvent) => {
     logEvent("Touch End", event);
+    const width = children[0].getBoundingClientRect().width;
     pressed = false;
 
     let index = Math.trunc(- translateX / width);
@@ -42,10 +43,15 @@ container.addEventListener("touchend", (event: TouchEvent) => {
 
     }
 });
+
+let lastTouchMove = 0;
 container.addEventListener("touchmove", (event: TouchEvent) => {
-    if (!pressed) return;
+    const now = Date.now();
+    if (now - lastTouchMove < 20 || !pressed) return;
+    lastTouchMove = now;
+
     const touch = event.touches[0];
-    translateX += touch.clientX * 0.2 - offset;
+    translateX += touch.clientX * 0.3 - offset;
     logEvent("Touch Move", event, `${translateX} ${event}, ${offset} `);
     slider.style.transform = `translateX(${translateX}px)`;
 });
